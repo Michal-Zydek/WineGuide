@@ -26,6 +26,11 @@ namespace WineGuide.Models
         [Column("recipe_ingredients_quantity")]
         [Required]
         public int RecipeIngredientsQuantity { get; set; }
+
+
+        //Connection Tabel
+        public int RecipeId { get; set; }
+        public Recipe Recipe { get; set; }
     }
 
 

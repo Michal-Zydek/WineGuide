@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WineGuideApp.Model;
 
 namespace WineGuide.Models
 {
@@ -22,6 +23,14 @@ namespace WineGuide.Models
         [Column("recipe_type_alcohol")]
         [Required]
         public TypeAlcohol RecipeTypeAlcohol { get; set; }
+
+
+        //Connection Tabel
+        public List<UserAccount_Recipe> UserAccount_Recipes { get; set; }
+        
+        public List<RecipeIngredients> RecipeIngredients { get; set; }
+
+        public List<SetMash> SetMashes { get; set; }
     }
 
     public enum TypeAlcohol

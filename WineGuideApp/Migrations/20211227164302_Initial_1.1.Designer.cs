@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WineGuideApp.Model;
 
 namespace WineGuideApp.Migrations
 {
     [DbContext(typeof(AppWineGuideContext))]
-    partial class AppWineGuideContextModelSnapshot : ModelSnapshot
+    [Migration("20211227164302_Initial_1.1")]
+    partial class Initial_11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,9 +51,6 @@ namespace WineGuideApp.Migrations
                         .HasColumnName("recipe_ingredients_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RecipeIngredientsName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -67,8 +66,6 @@ namespace WineGuideApp.Migrations
 
                     b.HasKey("RecipeIngredientsId");
 
-                    b.HasIndex("RecipeId");
-
                     b.ToTable("recipe_ingredients");
                 });
 
@@ -80,16 +77,11 @@ namespace WineGuideApp.Migrations
                         .HasColumnName("set_mash_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("SetMashStart")
                         .HasColumnType("datetime2")
                         .HasColumnName("set_mash_start");
 
                     b.HasKey("SetMashId");
-
-                    b.HasIndex("RecipeId");
 
                     b.ToTable("set_mash");
                 });
@@ -101,9 +93,6 @@ namespace WineGuideApp.Migrations
                         .HasColumnType("int")
                         .HasColumnName("set_mash_interaction_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("SetMashId")
-                        .HasColumnType("int");
 
                     b.Property<string>("SetMashInteractionName")
                         .IsRequired()
@@ -119,8 +108,6 @@ namespace WineGuideApp.Migrations
                         .HasColumnName("set_mash_interaction_type_of_quantity");
 
                     b.HasKey("SetMashInteractionId");
-
-                    b.HasIndex("SetMashId");
 
                     b.ToTable("set_mash_interaction");
                 });
@@ -168,39 +155,6 @@ namespace WineGuideApp.Migrations
                     b.ToTable("UserAccount_Recipes");
                 });
 
-            modelBuilder.Entity("WineGuide.Models.RecipeIngredients", b =>
-                {
-                    b.HasOne("WineGuide.Models.Recipe", "Recipe")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("WineGuide.Models.SetMash", b =>
-                {
-                    b.HasOne("WineGuide.Models.Recipe", "Recipe")
-                        .WithMany("SetMashes")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("WineGuide.Models.SetMashInteraction", b =>
-                {
-                    b.HasOne("WineGuide.Models.SetMash", "SetMash")
-                        .WithMany("SetMashInteraction")
-                        .HasForeignKey("SetMashId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SetMash");
-                });
-
             modelBuilder.Entity("WineGuideApp.Model.UserAccount_Recipe", b =>
                 {
                     b.HasOne("WineGuide.Models.Recipe", "Recipe")
@@ -222,16 +176,7 @@ namespace WineGuideApp.Migrations
 
             modelBuilder.Entity("WineGuide.Models.Recipe", b =>
                 {
-                    b.Navigation("RecipeIngredients");
-
-                    b.Navigation("SetMashes");
-
                     b.Navigation("UserAccount_Recipes");
-                });
-
-            modelBuilder.Entity("WineGuide.Models.SetMash", b =>
-                {
-                    b.Navigation("SetMashInteraction");
                 });
 
             modelBuilder.Entity("WineGuide.Models.UserAccount", b =>

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WineGuideApp.Model;
 
 namespace WineGuide.Models
 {
@@ -27,5 +28,8 @@ namespace WineGuide.Models
         [Required]
         public string AccountPassword { get; set; }
 
+
+        //Connection Tabel
+        public IList<UserAccount_Recipe> UserAccount_Recipes { get; set; }
     }
 }

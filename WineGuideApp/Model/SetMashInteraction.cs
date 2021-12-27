@@ -26,5 +26,9 @@ namespace WineGuide.Models
         [Column("set_mash_interaction_quantity")]
         [Required]
         public int SetMashInteractionQuantity { get; set; }
+
+        //Connection Tabel
+        public int SetMashId { get; set; }
+        public SetMash SetMash { get; set; }
     }
 }
