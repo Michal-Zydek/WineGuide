@@ -19,5 +19,11 @@ namespace WineGuide.Models
         [Required]
         public DateTime SetMashStart { get; set; }
 
+        
+        //Connection Tabel
+        public int RecipeId { get; set; }
+        public Recipe Recipe { get; set; }
+
+        public List<SetMashInteraction> SetMashInteraction { get; set; }
     }
 }
