@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WineGuideApp.AppLogic;
 
 namespace WineGuideApp.Controllers
 {
@@ -26,6 +27,10 @@ namespace WineGuideApp.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            RecipeClient recipeClient = new RecipeClient();
+            var test1 =  recipeClient.CreateWine(new SweetWine());
+            var test2 = recipeClient.CreateWine(new MediumSweetWine());
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
